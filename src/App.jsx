@@ -36,6 +36,15 @@ function App() {
     setTodos([...todos, { id: todoId, title, done: false }]);
     setTodoId(todoId + 1);
   };
+  // sukurti handleEditTodo App.jsx kuri kol kas iskonsolina id ir title
+  const handleEditTodo = (id, title) => {
+    // pakeisti esamo todos masyvo objekta kurio id yra lygus argumento id
+    // title i title gauta argumentu.
+    const todosCopy = todos.map(t => {
+      return t.id === id ? {...t, title} : {...t}
+    })
+    setTodos(todosCopy)
+  }
 
   useEffect(() => {
     setTodos(allTodos());
@@ -45,7 +54,7 @@ function App() {
     <div className="App">
       <h2>Todo list</h2>
       <AddTodo onAddTodo={handleAddTodo} />
-      <TodoList todos={todos} onDoneUndone={setDoneUndone} />
+      <TodoList onEditTodo={handleEditTodo} todos={todos} onDoneUndone={setDoneUndone} />
     </div>
   );
 }

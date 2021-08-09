@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const TodoItem = ({ item, onDoneUndone }) => {
+export const TodoItem = ({ item, onDoneUndone, onEditTodo }) => {
   const [isEditOn, setIsEditOn] = useState(false);
   // sukurti editTitle state
   const [editTitle, setEditTitle] = useState(item.title);
@@ -9,7 +9,7 @@ export const TodoItem = ({ item, onDoneUndone }) => {
     setEditTitle(e.target.value);
   }
   function sendTitle() {
-    if (isEditOn) return console.log('siusti update', editTitle)
+    if (isEditOn) onEditTodo(item.id, editTitle)
     setIsEditOn(!isEditOn)
   }
 
