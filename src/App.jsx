@@ -8,6 +8,10 @@ function App() {
   // console.log(allTodos());
   const [todos, setTodos] = useState([])
 
+  const setDoneUndone = (id) => {
+    console.log('setDoneUndone', id);
+  }
+
   useEffect(() => {
     setTodos(allTodos())
   }, [])
@@ -15,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <h2>Todo list</h2>
-      <TodoList todos={todos} />
+      <TodoList todos={todos} onDoneUndone={setDoneUndone} />
     </div>
   );
 }
