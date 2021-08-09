@@ -8,6 +8,7 @@ import allTodos from './db/todos'
 function App() {
   // console.log(allTodos());
   const [todos, setTodos] = useState([])
+  const [todoId, setTodoId] = useState(4)
 
   const setDoneUndone = (id) => {
     // console.log('setDoneUndone', id);
@@ -34,8 +35,9 @@ function App() {
   }
 
   const handleAddTodo = (title) => {
-    console.log(title);
     // pridedam nauja item i todos nemodifikuodammi esamo
+    setTodos([...todos, {id: todoId, title, done: false}])
+    setTodoId(todoId + 1)
   }
 
   useEffect(() => {
@@ -45,7 +47,7 @@ function App() {
   return (
     <div className="App">
       <h2>Todo list</h2>
-      <AddTodo />
+      <AddTodo onAddTodo={handleAddTodo} />
       <TodoList todos={todos} onDoneUndone={setDoneUndone} />
     </div>
   );
