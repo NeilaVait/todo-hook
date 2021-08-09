@@ -1,12 +1,11 @@
 import React from 'react'
 import { TodoItem } from './TodoItem'
 
-export const TodoList = (props) => {
+export const TodoList = ({todos}) => {
     return (
         <ul>
-            <TodoItem />
-            <TodoItem />
-            <TodoItem />
+            {todos.map(t => 
+            <TodoItem item={t} key={t.id} />)}
         </ul>
     )
 }

@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const TodoItem = (props) => {
+export const TodoItem = ({item}) => {
     return (
         <li>
-            TodoItem
+            {item.title}
         </li>
     )
 }
