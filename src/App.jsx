@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 
 import './App.css';
+import AddTodo from './components/AddTodo';
 import { TodoList } from './components/TodoList';
 import allTodos from './db/todos'
 
@@ -32,6 +33,11 @@ function App() {
     
   }
 
+  const handleAddTodo = (title) => {
+    console.log(title);
+    // pridedam nauja item i todos nemodifikuodammi esamo
+  }
+
   useEffect(() => {
     setTodos(allTodos())
   }, [])
@@ -39,6 +45,7 @@ function App() {
   return (
     <div className="App">
       <h2>Todo list</h2>
+      <AddTodo />
       <TodoList todos={todos} onDoneUndone={setDoneUndone} />
     </div>
   );
