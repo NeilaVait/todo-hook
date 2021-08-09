@@ -1,14 +1,14 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from "react";
 
-import './App.css';
-import AddTodo from './components/AddTodo';
-import { TodoList } from './components/TodoList';
-import allTodos from './db/todos'
+import "./App.css";
+import AddTodo from "./components/AddTodo";
+import { TodoList } from "./components/TodoList";
+import allTodos from "./db/todos";
 
 function App() {
   // console.log(allTodos());
-  const [todos, setTodos] = useState([])
-  const [todoId, setTodoId] = useState(4)
+  const [todos, setTodos] = useState([]);
+  const [todoId, setTodoId] = useState(4);
 
   const setDoneUndone = (id) => {
     // console.log('setDoneUndone', id);
@@ -23,27 +23,24 @@ function App() {
     // const foundTodo = todosCopy.find(i => i.id === id);
     // foundTodo.done = !foundTodo.done;
     // setTodos(todosCopy)
-    
+
     // second way
-    const todosCopy = todos.map(i => {
-      return i.id === id ? {...i, done: !i.done} : {...i}
-    })
-    setTodos(todosCopy)
-
-
-    
-  }
+    const todosCopy = todos.map((i) => {
+      return i.id === id ? { ...i, done: !i.done } : { ...i };
+    });
+    setTodos(todosCopy);
+  };
 
   const handleAddTodo = (title) => {
     // pridedam nauja item i todos nemodifikuodammi esamo
-    setTodos([...todos, {id: todoId, title, done: false}])
-    setTodoId(todoId + 1)
-  }
+    setTodos([...todos, { id: todoId, title, done: false }]);
+    setTodoId(todoId + 1);
+  };
 
   useEffect(() => {
-    setTodos(allTodos())
-  }, [])
-  
+    setTodos(allTodos());
+  }, []);
+
   return (
     <div className="App">
       <h2>Todo list</h2>
