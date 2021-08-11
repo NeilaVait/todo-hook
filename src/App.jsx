@@ -10,16 +10,24 @@ function App() {
   ];
   const [counters, setCounters] = useState(counterData);
 
-  const handleCount = (id, operation) => {
-    console.log('id', id, 'op', operation);
-    // const countersCopy = counters.map((c) => {
-    //   const difference = special ? 2 : 1;
-    //   const countFix = isNaN(count) ? 0 : count;
+  const handleCount = (counterId, operation) => {
+    // console.log('id', counterId, 'op', operation);
 
-    //   if (operation === '-') return setCount(countFix - difference);
-    //   if (operation === '+') return setCount(countFix + difference);
-    //   if (operation === 'rs') return special ? setCount('start over') : setCount(0);
-    // });
+    const countersCopy = [...counters];
+    const found = countersCopy.find((c) => c.id === counterId);
+
+    const count = found.value;
+    const diff = found.isSpecial ? 2 : 1;
+    const countFix = isNaN(count) ? 0 : count;
+
+    if (operation === '-') found.value = countFix - diff;
+    if (operation === '+') found.value = countFix + diff;
+    if (operation === 'rs') {
+      found.isSpecial ? (found.value = 'start over') : (found.value = 0);
+      found.value = found.isSpecial ? 'start over' : 0;
+    }
+
+    setCounters(countersCopy);
   };
 
   const resetAll = () => {
