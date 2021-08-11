@@ -3,29 +3,37 @@ import './App.css';
 import Counter from './components/counter';
 
 function App() {
-  const [counters, setCounters] = useState([
-    { id: 1, value: 0, special: false },
-    { id: 2, value: 0, special: false },
-    { id: 3, value: 0, special: true },
-  ]);
+  const counterData = [
+    { id: 1, value: 1 },
+    { id: 2, value: 2 },
+    { id: 3, value: 4, isSpecial: true },
+  ];
+  const [counters, setCounters] = useState(counterData);
 
-  const handleIncrement = (id) => {
-    console.log(counters, id);
+  const handleCount = (id, operation) => {
+    console.log('id', id, 'op', operation);
+    // const countersCopy = counters.map((c) => {
+    //   const difference = special ? 2 : 1;
+    //   const countFix = isNaN(count) ? 0 : count;
+
+    //   if (operation === '-') return setCount(countFix - difference);
+    //   if (operation === '+') return setCount(countFix + difference);
+    //   if (operation === 'rs') return special ? setCount('start over') : setCount(0);
+    // });
+  };
+
+  const resetAll = () => {
     const countersCopy = counters.map((c) => {
-      if (id === c.id && c.special === true) {
-        return { ...c, value: c.value + 2 };
-      } else if (id === c.id && c.special === false) {
-        return { ...c, value: c.value + 1 };
-      }
-      return { ...c };
+      return (c.value = 0);
     });
     setCounters(countersCopy);
   };
 
   return (
     <div className="App">
-      {counters.map((c) => (
-        <Counter key={c.id} counter={c} onIncrement={handleIncrement} />
+      <button onClick={resetAll}>Reset all</button>
+      {(counters || []).map((c) => (
+        <Counter special={c.isSpecial} key={c.id} counter={c} handleCount={handleCount} />
       ))}
     </div>
   );
