@@ -59,12 +59,16 @@ function App() {
     <div className="App">
       <h2>Todo list</h2>
       <AddTodo onAddTodo={handleAddTodo} />
-      <TodoList
-        onDeleteTodo={handleDeleteTodo}
-        onEditTodo={handleEditTodo}
-        todos={todos}
-        onDoneUndone={setDoneUndone}
-      />
+      {todos.length ? (
+        <TodoList
+          onDeleteTodo={handleDeleteTodo}
+          onEditTodo={handleEditTodo}
+          todos={todos}
+          onDoneUndone={setDoneUndone}
+        />
+      ) : (
+        <h3>No todos to show</h3>
+      )}
     </div>
   );
 }
