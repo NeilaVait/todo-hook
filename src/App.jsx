@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import "./App.css";
-import AddTodo from "./components/AddTodo";
-import { TodoList } from "./components/TodoList";
-import allTodos from "./db/todos";
+import './App.css';
+import AddTodo from './components/AddTodo';
+import { TodoList } from './components/TodoList';
+import allTodos from './db/todos';
 
 function App() {
   // console.log(allTodos());
@@ -36,15 +36,20 @@ function App() {
     setTodos([...todos, { id: todoId, title, done: false }]);
     setTodoId(todoId + 1);
   };
-  // sukurti handleEditTodo App.jsx kuri kol kas iskonsolina id ir title
+
   const handleEditTodo = (id, title) => {
     // pakeisti esamo todos masyvo objekta kurio id yra lygus argumento id
     // title i title gauta argumentu.
-    const todosCopy = todos.map(t => {
-      return t.id === id ? {...t, title} : {...t}
-    })
-    setTodos(todosCopy)
-  }
+    const todosCopy = todos.map((t) => {
+      return t.id === id ? { ...t, title } : { ...t };
+    });
+    setTodos(todosCopy);
+  };
+
+  const handleDeleteTodo = (id) => {
+    const todosAfterDelete = todos.filter((t) => t.id !== id);
+    setTodos(todosAfterDelete);
+  };
 
   useEffect(() => {
     setTodos(allTodos());
@@ -54,7 +59,12 @@ function App() {
     <div className="App">
       <h2>Todo list</h2>
       <AddTodo onAddTodo={handleAddTodo} />
-      <TodoList onEditTodo={handleEditTodo} todos={todos} onDoneUndone={setDoneUndone} />
+      <TodoList
+        onDeleteTodo={handleDeleteTodo}
+        onEditTodo={handleEditTodo}
+        todos={todos}
+        onDoneUndone={setDoneUndone}
+      />
     </div>
   );
 }

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-export const TodoItem = ({ item, onDoneUndone, onEditTodo }) => {
+export const TodoItem = ({ item, onDoneUndone, onEditTodo, onDeleteTodo }) => {
   const [isEditOn, setIsEditOn] = useState(false);
   // sukurti editTitle state
   const [editTitle, setEditTitle] = useState(item.title);
@@ -9,8 +9,8 @@ export const TodoItem = ({ item, onDoneUndone, onEditTodo }) => {
     setEditTitle(e.target.value);
   }
   function sendTitle() {
-    if (isEditOn) onEditTodo(item.id, editTitle)
-    setIsEditOn(!isEditOn)
+    if (isEditOn) onEditTodo(item.id, editTitle);
+    setIsEditOn(!isEditOn);
   }
 
   // salyginai rodyti input arba span
@@ -19,16 +19,14 @@ export const TodoItem = ({ item, onDoneUndone, onEditTodo }) => {
   return (
     <li className="cur-point">
       {!isEditOn ? (
-        <span
-          onClick={() => onDoneUndone(item.id)}
-          className={item.done ? "item-done" : ""}
-        >
+        <span onClick={() => onDoneUndone(item.id)} className={item.done ? 'item-done' : ''}>
           {item.title}
         </span>
       ) : (
         <input type="text" value={editTitle} onChange={handleEditTitle} />
       )}
       <i onClick={sendTitle} className="fa fa-pencil"></i>
+      <i onClick={() => onDeleteTodo(item.id)} style={{ color: 'red' }} className="fa fa-trash"></i>
     </li>
   );
 };
