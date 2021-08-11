@@ -30,16 +30,15 @@ function App() {
     setCounters(countersCopy);
   };
 
-  const resetAll = () => {
-    const countersCopy = counters.map((c) => {
-      return (c.value = 0);
-    });
+  const resetCounters = () => {
+    const countersCopy = counters.map((c) => ({ ...c, value: c.isSpecial ? 'start over' : 0 }));
+
     setCounters(countersCopy);
   };
 
   return (
     <div className="App">
-      <button onClick={resetAll}>Reset all</button>
+      <button onClick={resetCounters}>Reset all</button>
       {(counters || []).map((c) => (
         <Counter special={c.isSpecial} key={c.id} counter={c} handleCount={handleCount} />
       ))}
